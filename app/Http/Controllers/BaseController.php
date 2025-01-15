@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
@@ -25,7 +24,7 @@ class BaseController extends Controller
             'code' => $code,
             'success' => false,
             'message' => $error,
-        ];  
+        ];
 
         if(!empty($errorMessages)) {
             $response['data'] = $errorMessages;

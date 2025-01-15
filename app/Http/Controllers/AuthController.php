@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class AuthController extends BaseController
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email,except,id',
                 'password' => 'required',
-                
+
             ]);
 
             if($validateUser->fails()){
@@ -54,13 +53,14 @@ class AuthController extends BaseController
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]); 
+            ]);
             $token = JWTAuth::fromUser($user);
             return $this->success(["user" => $user, "token" => $token], "User Created Successfully", 201);
         }catch(Exception $e){
             return $this->error($e->getMessage() ? $e->getMessage() : "Internal server error!", null, $e->getCode() ? $e->getCode() : 500);
         }
     }
+
     public function logout(){
         try{
             if ($token = JWTAuth::getToken()) {

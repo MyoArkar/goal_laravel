@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
-            $table->json('goal');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status', ['pending', 'in progress', 'completed'])->default('pending');
+            $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->timestamps();
         });
     }
