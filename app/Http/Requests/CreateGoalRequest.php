@@ -27,7 +27,7 @@ class CreateGoalRequest extends FormRequest
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'priority' => 'required|in:low,medium,high',
-            'status' => 'required|in:pending,in progress,completed'
+            'status' => 'nullable|in:pending,in progress,completed'
         ];
     }
 
@@ -49,7 +49,6 @@ class CreateGoalRequest extends FormRequest
             'end_date.after_or_equal' => 'End date must be after or equal to start date',
             'priority.required' => 'Priority level is required',
             'priority.in' => 'Priority must be either low, medium, or high',
-            'status.required' => 'Status is required',
             'status.in' => 'Status must be either pending, in progress, or completed'
         ];
     }
